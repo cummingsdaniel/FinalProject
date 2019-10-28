@@ -13,11 +13,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Button mainBtnRecipe = findViewById(R.id.btnLogin);
-//        login.setOnClickListener(bt -> {
-//            Intent nextPage = new Intent( MainActivity.this, ProfileActivity.class);
-//            nextPage.putExtra("email", txtEmail.getText().toString());
-//            startActivity(nextPage);
-//        });
+        Button mainBtnRecipe = findViewById(R.id.mainBtnRecipe);
+        mainBtnRecipe.setOnClickListener(bt -> {
+            Intent nextPage = new Intent( MainActivity.this, RecipeActivity.class);
+            startActivity(nextPage);
+        });
     }
 }
