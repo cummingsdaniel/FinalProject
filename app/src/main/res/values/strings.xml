@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">CST2335 Final Project</string>
-    <string name="btn1Text">Foreign Currency Exchange - Jarod Porter</string>
-    <string name="btn2Text">Electric Car Charging Station Finder - TBD</string>
-    <string name="btn3Text">Recipe Search - TBD</string>
-    <string name="btn4Text">News - Daniel Cummings</string>
+    <string name="MainApp_name">CST2335 Final Project</string>
+    <string name="MainBtnCurrencyText">Foreign Currency Exchange - Jarod Porter</string>
+    <string name="MainBtnCarText">Electric Car Charging Station Finder - Ellis Ly</string>
+    <string name="MainBtnRecipeText">Recipe Search - Mark Simonyi</string>
+    <string name="MainBtnNewsText">News - Daniel Cummings</string>
 </resources>

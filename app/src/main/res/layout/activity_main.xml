@@ -8,19 +8,19 @@
 
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn1Text"
+        android:text="@string/MainBtnCurrencyText"
         />
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn2Text"
+        android:text="@string/MainBtnCarText"
         />
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn3Text"
+        android:text="@string/MainBtnRecipeText"
         />
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn4Text"
+        android:text="@string/MainBtnNewsText"
         />
 
 </LinearLayout>
