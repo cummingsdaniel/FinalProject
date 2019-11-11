@@ -17,5 +17,6 @@ public class NewsMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_main);
 
+
     }
 }
