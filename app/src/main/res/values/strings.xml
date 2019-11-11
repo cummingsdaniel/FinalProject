@@ -4,4 +4,10 @@
     <string name="MainBtnCarText">Electric Car Charging Station Finder - Ellis Ly</string>
     <string name="MainBtnRecipeText">Recipe Search - Mark Simonyi</string>
     <string name="MainBtnNewsText">News - Daniel Cummings</string>
+
+    <string name="recTxtSearchHint">Search</string>
+    <string name="recBtnSearchText">Search</string>
+    <string name="recLblViewTitle">Title</string>
+
+
 </resources>
