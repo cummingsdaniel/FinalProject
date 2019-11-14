@@ -1,5 +1,6 @@
 package com.marksimonyi.android.cst2335finalproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,19 +8,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
+/**
+ * @author Mark Simonyi
+ *
+ * Recipe app main page code.
+ */
 public class RecipeActivity extends AppCompatActivity {
 
     public static final String ACTIVITY_NAME = "RECIPE_ACTIVITY";
     ArrayList<Recipe> resultsList = new ArrayList<>();
     MSRecipeAdapter msAdapter;
 
+    /**
+     * onCreate method that sets up the initial state for the main page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(ACTIVITY_NAME, "In function: onCreate");
@@ -31,6 +45,8 @@ public class RecipeActivity extends AppCompatActivity {
         resultsList.add(new Recipe("example1", "", ""));
         resultsList.add(new Recipe("example2", "", ""));
         resultsList.add(new Recipe("example3", "", ""));
+
+        Toast.makeText(this, "Updated " + 3 + " rows", Toast.LENGTH_LONG).show();
 
         msAdapter = new MSRecipeAdapter();
         list.setAdapter(msAdapter);
@@ -50,14 +66,31 @@ public class RecipeActivity extends AppCompatActivity {
             startActivity(nextPage);
         });
 
+        Button searchButton = findViewById(R.id.recBtnSearch);
+        searchButton.setOnClickListener(b -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            //This is the builder pattern, just call many functions on the same object:
+            AlertDialog dialog = builder.setTitle("Alert!")
+                    .setMessage("This button is not ready yet!")
+                    .setPositiveButton("OK",(d,w) -> {  /* nothing */})
+                    //If you click the "Cancel" button:
+                    .setNegativeButton("Also, OK", (d,w) -> {  /* nothing */})
+                    .create();
+
+            //then show the dialog
+            dialog.show();
+        });
 
 
         //1.	Each person’s project must have a ListView somewhere to present items. Selecting an item from the ListView must show detailed information about the item selected.
         //2.	Each activity must have at least 1 progress bar and at least 1 button.
         //3.	Each activity must have at least 1 edit text with appropriate text input method and at least 1 Toast, Snackbar, and custom dialog notification.
 
+
+
         //•	Create an interface that allows the user to enter a search term about recipes.
-        //    There should be a “search” button that will search for all recipes that include that term. For example, this is a search for “chicken breast”:
+        //    There should be a "search" button that will search for all recipes that include that term. For example, this is a search for "chicken breast":
         //•	https://www.food2fork.com/api/search?key=YOUR_API_KEY&q=chicken%20breast
         //
         //•	Your application will call the web server to retrieve a list of recipes that match the term.
@@ -69,6 +102,9 @@ public class RecipeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * adapter for displaying recipe results
+     */
     protected class MSRecipeAdapter extends BaseAdapter
     {
         @Override
