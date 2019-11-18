@@ -8,6 +8,14 @@
     <string name="recTxtSearchHint">Search</string>
     <string name="recBtnSearchText">Search</string>
     <string name="recLblViewTitle">Title</string>
+    <string name="recMmiNewsText">News</string>
+    <string name="recMmiCurrencyText">Currency</string>
+    <string name="recMmiChargeText">Car Charging</string>
+    <string name="recMmiHelpText">Help</string>
+    <string name="recHelpFullText">Author: Mark Simonyi
+    Activity Version: 0.2.0.1
+    To use this app, simply enter a search term in the search box at the top, and click search.
+    </string>
 
 
 </resources>
