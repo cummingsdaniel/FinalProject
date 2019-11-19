@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.marksimonyi.android.cst2335finalproject.NewsMain">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/go_to_saved"
+        android:icon="@drawable/icons8-save-16"
+        android:title="@string/go_to_fav"
+        app:showAsAction="always" />
 </menu>
