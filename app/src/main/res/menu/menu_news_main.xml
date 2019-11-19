@@ -4,7 +4,8 @@
     tools:context="com.marksimonyi.android.cst2335finalproject.NewsMain">
     <item
         android:id="@+id/go_to_saved"
-        android:icon="@drawable/icons8-save-16"
+        android:icon="@drawable/icons8-circled-up-right-48"
         android:title="@string/go_to_fav"
+        android:orderInCategory="1"
         app:showAsAction="always" />
 </menu>
