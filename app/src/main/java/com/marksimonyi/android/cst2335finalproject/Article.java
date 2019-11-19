@@ -12,6 +12,8 @@ import android.view.View;
 import android.webkit.WebView;
 
 public class Article extends AppCompatActivity{
+    WebView webView;
+    String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
