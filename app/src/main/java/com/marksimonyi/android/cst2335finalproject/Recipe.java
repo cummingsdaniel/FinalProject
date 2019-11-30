@@ -9,7 +9,14 @@ public class Recipe {
     private String title;
     private String image;
     private String url;
-
+    /**
+     * tracks the database id of
+     */
+    private long id;
+    /**
+     * tracks whether this recipe is in the favourites list
+     */
+    private boolean isFave;
 
     /**
      * Constructor; creates the Recipe object with all properties.
@@ -69,5 +76,33 @@ public class Recipe {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * setter for ID
+     * @param setId
+     */
+    protected void setId(long setId ) { id = setId; }
+
+    /**
+     * getter for ID
+     * @return
+     */
+    public long getId() { return id; }
+
+    /**
+     * getter for isFave
+     * @return
+     */
+    public boolean isFave() {
+        return isFave;
+    }
+
+    /**
+     * setter for isFave
+     * @param fave
+     */
+    public void setFave(boolean fave) {
+        isFave = fave;
     }
 }

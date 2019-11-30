@@ -4,7 +4,7 @@
     <string name="recMmiChargeText">Car Charging</string>
     <string name="recMmiNewsText">News</string>
     <string name="recTxtSearchHint">Search</string>
-    <string name="recLblViewTitle">Title</string>
+    <string name="recLblViewTitle">Title:</string>
     <string name="recBtnSearchText">Search</string>
     <string name="MainBtnRecipeText">Recipe Search - Mark Simonyi</string>
     <string name="MainBtnNewsText">News - Daniel Cummings</string>
@@ -13,4 +13,6 @@
     <string name="MainApp_name">CST2335 Final Project</string>
     <string name="recMmiHelpText">Help</string>
     <string name="recHelpFullText">"Author: Mark Simonyi     Activity Version: 0.2.0.1     To use this app, simply enter a search term in the search box at the top, and click search.     "</string>
+    <string name="recLblViewId">ID:</string>
+    <string name="recBtnFrgDeleteText">Delete</string>
 </resources>

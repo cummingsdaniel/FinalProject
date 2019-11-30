@@ -1,7 +1,11 @@
 package com.marksimonyi.android.cst2335finalproject;
 
-import android.content.DialogInterface;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +22,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,8 +47,36 @@ import androidx.appcompat.widget.Toolbar;
  */
 public class RecipeActivity extends AppCompatActivity {
 
-    public static final String ACTIVITY_NAME = "RECIPE_ACTIVITY";
+    //public static final String ACTIVITY_NAME = "RECIPE_ACTIVITY";
+    /**
+     * request code identifier for requests to empty page activity
+     * used when viewing details on smaller screens
+     */
+    public static final int RQ_EMPTY_PAGE = 1;
+    /**
+     * the label on data containing the ID of the element within the database.
+     */
+    public static final String ID = "ID";
+    /**
+     * the label on data containing the original URL of the source recipe.
+     */
+    public static final String URL = "URL";
+    /**
+     * the label on data containing the Title of the element.
+     */
+    public static final String TITLE = "Title";
+    /**
+     * the label on data containing the URL of the element image.
+     */
+    public static final String IMAGE = "Image";
+    /**
+     * the list that holds the search results
+     * backs the listview that displays the results
+     */
     ArrayList<Recipe> resultsList = new ArrayList<>();
+    /**
+     * the instance of the custom adapter that handles display of results
+     */
     MSRecipeAdapter msAdapter;
 
     /**
@@ -55,23 +85,43 @@ public class RecipeActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.e(ACTIVITY_NAME, "In function: onCreate");
+        //Log.e(ACTIVITY_NAME, "In function: onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_activity);
 
         Toolbar tBar = findViewById(R.id.recTbMain);
         setSupportActionBar(tBar);
         ListView list = findViewById(R.id.recLstResults);
-
-
-        //resultsList.add(new Recipe("example1", "", ""));
-        //resultsList.add(new Recipe("example2", "", ""));
-        //resultsList.add(new Recipe("example3", "", ""));
-
-        Toast.makeText(this, "Updated " + 3 + " rows", Toast.LENGTH_LONG).show();
-
         msAdapter = new MSRecipeAdapter();
         list.setAdapter(msAdapter);
+        boolean isTablet = findViewById(R.id.frame) != null; //check if the FrameLayout is loaded
+
+        SharedPreferences prefs = getSharedPreferences("RecipePrefs", Context.MODE_PRIVATE);
+        EditText searchBox = findViewById(R.id.recTxtSearch);
+        searchBox.setText(prefs.getString("search",""));
+
+        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Cursor c = db.rawQuery(String.format("SELECT * FROM %s", RecipeDBHelper.REC_SAV_TABLE_NAME), new String[]{});
+
+        int titleIndex = c.getColumnIndex( RecipeDBHelper.COL_TITLE );
+        int imgIndex = c.getColumnIndex( RecipeDBHelper.COL_IMG );
+        int urlIndex = c.getColumnIndex( RecipeDBHelper.COL_URL );
+        int dbID = c.getColumnIndex(RecipeDBHelper.COL_ID);
+        c.moveToFirst();
+        while(!c.isAfterLast()) {
+            String title = c.getString(titleIndex);
+            String img = c.getString(imgIndex);
+            String url = c.getString(urlIndex);
+            Recipe r = new Recipe(title, img, url);
+            r.setId(c.getLong(dbID));
+            resultsList.add(r);
+            c.moveToNext();
+        }
+        msAdapter.notifyDataSetChanged();
+
+        Toast.makeText(this, "Found and loaded " + resultsList.size() + " saved Recipes!", Toast.LENGTH_LONG).show();
 
         //This listens for items being clicked in the list view
         list.setOnItemClickListener(( parent,  view,  position,  id) -> {
@@ -79,26 +129,36 @@ public class RecipeActivity extends AppCompatActivity {
 
             //When you click on a row, open selected recipe on a new page (ViewRecipe)
             Recipe selected = resultsList.get(position);
-            Intent nextPage = new Intent(RecipeActivity.this, ViewRecipe.class);
-            nextPage.putExtra("title", selected.getTitle());
-            nextPage.putExtra("image", selected.getImage());
-            nextPage.putExtra("url", selected.getUrl());
-            nextPage.putExtra("Id", id);
-            //startActivityForResult(nextPage, R.layout.activity_view_recipe);
-            startActivity(nextPage);
+            Bundle data = new Bundle();
+            data.putString(TITLE, selected.getTitle());
+            data.putString(IMAGE, selected.getImage());
+            data.putString(URL, selected.getUrl());
+            data.putLong(ID, selected.getId());
+
+            //startActivity(nextPage);
+            if(isTablet)
+            {
+                RecipeDetailFragment rdFragment = new RecipeDetailFragment(); //add a DetailFragment
+                rdFragment.setArguments( data ); //pass it a bundle for information
+                rdFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frame, rdFragment) //Add the fragment in FrameLayout
+                        .addToBackStack(null) //make the back button undo the transaction
+                        .commit(); //actually load the fragment.
+            }
+            else //isPhone
+            {
+                Intent nextPage = new Intent(RecipeActivity.this, ViewRecipe.class);
+                nextPage.putExtras(data); //send data to next activity
+                startActivityForResult(nextPage, RQ_EMPTY_PAGE); //make the transition
+            }
+
         });
 
         Button searchButton = findViewById(R.id.recBtnSearch);
         searchButton.setOnClickListener(b -> {
-            //AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            //AlertDialog dialog = builder.setTitle("Alert!")
-            //        .setMessage("This button is not ready yet!")
-            //        .setPositiveButton("OK",(d,w) -> {  /* nothing */})
-            //        .setNegativeButton("Also, OK", (d,w) -> {  /* nothing */})
-            //        .create();
-            //dialog.show();
-
-            EditText searchBox = findViewById(R.id.recTxtSearch);
+            //EditText searchBox = findViewById(R.id.recTxtSearch);
             RecipeQuery rq = new RecipeQuery(searchBox.getText().toString());
             Log.i("ms", searchBox.getText().toString());
             rq.execute();
@@ -117,6 +177,15 @@ public class RecipeActivity extends AppCompatActivity {
         //    If you know a language other than English, then you can support that language in your application and don’t need to support American English.
         //9.	Each activity must use an AsyncTask to retrieve data from an http server.
 
+        // CP-3 Complete everything.
+        //5.	Each Activity must use a fragment somewhere in its graphical interface.
+        //8.	The items listed in the ListView must be stored by the application so that appear the next time the application is launched.
+        //    The user must be able to add and delete items, which would then also be stored in a database.
+        //10.	Each activity must use SharedPreferences to save something about the application for use the next time the application is launched.
+        //11.	All activities must be integrated into a single working application, on a single device or emulator.
+        //12.	The interfaces must look professional, with GUI elements properly laid out and aligned.
+        //13.	The functions and variables you write must be properly documented using JavaDoc comments.
+        //
 
 
 
@@ -132,6 +201,18 @@ public class RecipeActivity extends AppCompatActivity {
         //•	Your application should save the last topic that was searched to display the next time the application is launched.
 
     }
+/*
+    public void deleteMessageId(int id)
+    {
+        Log.i("Delete this message:" , " id="+id);
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.delete(dbHelper.TABLE_NAME, dbHelper.COL_ID + " = ?", new String[]{""+messageLog.get(id).getId()});
+
+        messageLog.remove(id);
+        myAdapter.notifyDataSetChanged();
+    } */
 
     /**
      * query class that handles api access to the Food2Fork recipe search api
@@ -141,7 +222,11 @@ public class RecipeActivity extends AppCompatActivity {
         /**
          * the search string used to return results from the api
          */
+
         private String searchString;
+        /**
+         * the arraylist that holds the search results
+         */
         private ArrayList<Recipe> results;
 
         /**
@@ -325,5 +410,27 @@ public class RecipeActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("RecipePrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        EditText searchBox = findViewById(R.id.recTxtSearch);
+        edit.putString("search", searchBox.getText().toString());
+        edit.commit();
+
+        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for (Recipe r : resultsList) {
+            ContentValues cv = new ContentValues();
+            cv.put(RecipeDBHelper.COL_TITLE, r.getTitle());
+            cv.put(RecipeDBHelper.COL_IMG, r.getImage());
+            cv.put(RecipeDBHelper.COL_URL, r.getUrl());
+            db.insert(RecipeDBHelper.REC_SAV_TABLE_NAME, null, cv); // long id =
+        }
+
     }
 }
