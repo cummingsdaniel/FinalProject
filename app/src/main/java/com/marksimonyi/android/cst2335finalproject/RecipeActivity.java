@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,14 +29,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -70,6 +78,10 @@ public class RecipeActivity extends AppCompatActivity {
      */
     public static final String IMAGE = "Image";
     /**
+     * the label on data indicating whether the recipe is a favourite.
+     */
+    public static final String FAV = "Favourite";
+    /**
      * the list that holds the search results
      * backs the listview that displays the results
      */
@@ -94,7 +106,7 @@ public class RecipeActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.recLstResults);
         msAdapter = new MSRecipeAdapter();
         list.setAdapter(msAdapter);
-        boolean isTablet = findViewById(R.id.frame) != null; //check if the FrameLayout is loaded
+        boolean isTablet = findViewById(R.id.recFrame) != null; //check if the FrameLayout is loaded
 
         SharedPreferences prefs = getSharedPreferences("RecipePrefs", Context.MODE_PRIVATE);
         EditText searchBox = findViewById(R.id.recTxtSearch);
@@ -108,18 +120,24 @@ public class RecipeActivity extends AppCompatActivity {
         int titleIndex = c.getColumnIndex( RecipeDBHelper.COL_TITLE );
         int imgIndex = c.getColumnIndex( RecipeDBHelper.COL_IMG );
         int urlIndex = c.getColumnIndex( RecipeDBHelper.COL_URL );
+        int favIndex = c.getColumnIndex( RecipeDBHelper.COL_FAV );
         int dbID = c.getColumnIndex(RecipeDBHelper.COL_ID);
         c.moveToFirst();
         while(!c.isAfterLast()) {
             String title = c.getString(titleIndex);
             String img = c.getString(imgIndex);
             String url = c.getString(urlIndex);
+            int fav = c.getInt(favIndex);
             Recipe r = new Recipe(title, img, url);
+            r.setFav(fav==1);
             r.setId(c.getLong(dbID));
             resultsList.add(r);
             c.moveToNext();
         }
+        c.close();
         msAdapter.notifyDataSetChanged();
+
+        db.delete(RecipeDBHelper.REC_SAV_TABLE_NAME, RecipeDBHelper.COL_ID + " > ?", new String[]{"0"}); // clear table of existing values
 
         Toast.makeText(this, "Found and loaded " + resultsList.size() + " saved Recipes!", Toast.LENGTH_LONG).show();
 
@@ -134,6 +152,7 @@ public class RecipeActivity extends AppCompatActivity {
             data.putString(IMAGE, selected.getImage());
             data.putString(URL, selected.getUrl());
             data.putLong(ID, selected.getId());
+            data.putBoolean(FAV, selected.isFav());
 
             //startActivity(nextPage);
             if(isTablet)
@@ -143,7 +162,7 @@ public class RecipeActivity extends AppCompatActivity {
                 rdFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, rdFragment) //Add the fragment in FrameLayout
+                        .replace(R.id.recFrame, rdFragment) //Add the fragment in FrameLayout
                         .addToBackStack(null) //make the back button undo the transaction
                         .commit(); //actually load the fragment.
             }
@@ -201,18 +220,56 @@ public class RecipeActivity extends AppCompatActivity {
         //•	Your application should save the last topic that was searched to display the next time the application is launched.
 
     }
-/*
-    public void deleteMessageId(int id)
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RQ_EMPTY_PAGE)
+        {
+            if(resultCode == RESULT_OK) //if you hit the delete button instead of back button
+            {
+                long id = data.getLongExtra(ID, -1);
+                if (data.getBooleanExtra("add", false) ) {
+                    Recipe r = resultsList.get(resultsList.indexOf(new Recipe((int)id)));
+                    r.setFav(true);
+                    addFavRecipe(r);
+                } else {
+                    deleteRecipeId((int)id);
+                }
+
+            }
+        }
+    }
+
+    /**
+     * helper method to delete a message from the favourites database by id
+     * @param id
+     */
+    public void deleteRecipeId(int id)
     {
-        Log.i("Delete this message:" , " id="+id);
-        DBHelper dbHelper = new DBHelper(this);
+        Log.i("Delete this recipe:" , " id="+id);
+        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        db.delete(dbHelper.TABLE_NAME, dbHelper.COL_ID + " = ?", new String[]{""+messageLog.get(id).getId()});
+        db.delete(dbHelper.REC_FAV_TABLE_NAME, dbHelper.COL_ID + " = ?", new String[]{""+id});
 
-        messageLog.remove(id);
-        myAdapter.notifyDataSetChanged();
-    } */
+        //resultsList.get(resultsList.indexOf(new Recipe(id))).setFav(false);
+    }
+
+    public void addFavRecipe(Recipe r) {
+        Log.i("Add this Recipe:" , " id="+r.getId());
+        RecipeDBHelper dbHelper = new RecipeDBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(RecipeDBHelper.COL_TITLE, r.getTitle());
+        cv.put(RecipeDBHelper.COL_IMG, r.getImage());
+        cv.put(RecipeDBHelper.COL_URL, r.getUrl());
+        int fav = r.isFav() ? 1 : 0;
+        cv.put(RecipeDBHelper.COL_FAV, fav);
+        db.insert(RecipeDBHelper.REC_FAV_TABLE_NAME, null, cv); // long id =
+    }
 
     /**
      * query class that handles api access to the Food2Fork recipe search api
@@ -231,11 +288,21 @@ public class RecipeActivity extends AppCompatActivity {
 
         /**
          * constructs a recipeQuery with the search string provided by the user
-         * @param searchString
+         * @param searchString the string to search with
          */
         RecipeQuery(String searchString) {
             this.searchString = searchString;
             results = new ArrayList<>();
+        }
+
+        /**
+         * helper method for determining if a file has already been downloaded.
+         * @param fname
+         * @return true if the file exists, false if not.
+         */
+        public boolean fileExistance(String fname) {
+            File file = getBaseContext().getFileStreamPath(fname);
+            return file.exists();
         }
 
         /**
@@ -259,7 +326,7 @@ public class RecipeActivity extends AppCompatActivity {
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inStream = urlConnection.getInputStream();
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, "UTF-8"), 8);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, StandardCharsets.UTF_8), 8);
                 StringBuilder sb = new StringBuilder();
                 String line = null;
                 while ((line = reader.readLine()) != null){sb.append(line + "\n");}String result = sb.toString();
@@ -271,8 +338,50 @@ public class RecipeActivity extends AppCompatActivity {
                 for (int i = 0; i<jArray.length(); ++i) {
                     try {
                         JSONObject aRecipe = jArray.getJSONObject(i);
-                        Recipe r = new Recipe(aRecipe.getString("title"), aRecipe.getString("image_url"), aRecipe.getString("source_url"));
+                        String imageUrl = aRecipe.getString("image_url");
+                        Recipe r = new Recipe(aRecipe.getString("title"), imageUrl, aRecipe.getString("source_url"));
                         results.add(r);
+
+                        String imgUrl = imageUrl.substring(imageUrl.lastIndexOf("/")+1);
+                        Log.i("msLoadImage","Looking for " + imgUrl);
+                        if (fileExistance(imgUrl)) {
+                            Log.i("msLoadImage", "Found " + imgUrl + " locally.");
+//                            FileInputStream fis = null;
+//                            try {    fis = openFileInput(imgUrl);   }
+//                            catch (FileNotFoundException e) {    e.printStackTrace();  }
+//                            Bitmap bm = BitmapFactory.decodeStream(fis);
+//                            weatherImg = bm;
+
+                        } else {
+                            Log.i("msLoadImage", "Downloading " + imgUrl + " from internet.");
+
+                            //String urlString = "http://openweathermap.org/img/w/" + iconName + ".png";
+                            Bitmap image = null;
+                            //URL neurl = new URL(imageUrl);
+                            URL neurl = new URL("https://bigoven-res.cloudinary.com/image/upload/d_recipe-no-image.jpg,t_recipe-480/lasagna-49.jpg");
+                            HttpURLConnection connection = (HttpURLConnection) neurl.openConnection();
+                            //urlConnection.setFollowRedirects(true); // responseCode = 301 always
+                            connection.connect();
+                            int responseCode = connection.getResponseCode();
+                            //if (responseCode == 200 || responseCode == 301) {
+                            if (responseCode == 200) {
+                                image = BitmapFactory.decodeStream(connection.getInputStream());
+
+                                if (image != null) {
+                                    FileOutputStream outputStream = openFileOutput(imgUrl, Context.MODE_PRIVATE);
+                                    image.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+                                    outputStream.flush();
+                                    outputStream.close();
+                                }
+                            }
+
+                            publishProgress(100);
+                        }
+
+
+
+
+
                     } catch(org.json.JSONException je) {
                         //error loading recipe
                     }
@@ -290,7 +399,7 @@ public class RecipeActivity extends AppCompatActivity {
         /**
          * automatically called when publishProgress is called.
          * Updates the ui/progressbar (asynchronously) to reflect progress
-         * @param value
+         * @param value the values passed from publishProgress
          */
         @Override
         protected void onProgressUpdate(Integer... value) {
@@ -303,7 +412,7 @@ public class RecipeActivity extends AppCompatActivity {
         /**
          * automatically called when doInBackground is finished.
          * displays results in UI.
-         * @param result
+         * @param result the result returned from doInBackground
          */
         @Override
         protected void onPostExecute(String result) {
@@ -354,11 +463,8 @@ public class RecipeActivity extends AppCompatActivity {
             return newView;
         }
 
-        public long getItemId(int position)
-        {
-            return 0;
-        }
-        //public long getItemId(int position) { return getItem(position).getId(); }
+        //public long getItemId(int position) { return 0; }
+        public long getItemId(int position) { return getItem(position).getId(); }
     }
 
     /**
@@ -398,6 +504,10 @@ public class RecipeActivity extends AppCompatActivity {
                 Toast.makeText(this, "News not implemented", Toast.LENGTH_LONG).show();
                 //Intent nextPage = new Intent( this, NewsActivity.class);
                 //startActivity(nextPage);
+                break;
+            case R.id.recMmiFav:
+                Intent nextPage = new Intent(RecipeActivity.this, RecipeFavourites.class);
+                startActivity(nextPage); //make the transition
                 break;
             case R.id.recMmiHelp:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);

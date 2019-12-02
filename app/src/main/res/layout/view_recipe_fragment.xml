@@ -1,34 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recTbNavBar" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/recLblFrgTitle"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="@string/recLblViewTitle" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/recTxtViewTitle" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/recLblFrgTitle"
+        android:id="@+id/recTxtFrgViewTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/recLblFrgUrl"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/recTxtFrgViewTitle"
+        android:text="@string/recLblViewUrl" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/recLblFrgUrl"
+        android:layout_below="@id/recTxtFrgViewTitle"
+        android:id="@+id/recTxtFrgViewUrl" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recLblFrgId"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/recTxtFrgViewUrl"
         android:text="@string/recLblViewId" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/recLblFrgId"
+        android:layout_below="@id/recTxtFrgViewUrl"
         android:id="@+id/recTxtFrgViewId" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/recTxtFrgViewId"
+        android:layout_alignParentStart="true"
         android:text="@string/recBtnFrgDeleteText"
         android:id="@+id/recBtnFrgDelete" />
-</LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recTxtFrgViewId"
+        android:layout_toRightOf="@id/recBtnFrgDelete"
+        android:text="@string/recBtnFrgAddText"
+        android:id="@+id/recBtnFrgAdd" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recBtnFrgAdd"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/recImgFrgImage" />
+</RelativeLayout>

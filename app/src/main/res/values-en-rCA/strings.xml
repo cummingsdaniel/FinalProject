@@ -15,4 +15,7 @@
     <string name="recHelpFullText">"Author: Mark Simonyi     Activity Version: 0.2.0.1     To use this app, simply enter a search term in the search box at the top, and click search.     "</string>
     <string name="recLblViewId">ID:</string>
     <string name="recBtnFrgDeleteText">Delete</string>
+    <string name="recLblViewUrl">URL:</string>
+    <string name="recMmiFavText">Favourites</string>
+    <string name="recBtnFrgAddText">Add to Favourites</string>
 </resources>

@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/recProgressBar"
         android:layout_below="@+id/recBtnSearch"
+        style="?android:attr/progressBarStyleHorizontal"
         android:visibility="invisible"
         />
 

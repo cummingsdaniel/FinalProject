@@ -14,6 +14,7 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
     public static final String COL_TITLE = "Title";
     public static final String COL_IMG = "ImageUrl";
     public static final String COL_URL = "PageUrl";
+    public static final String COL_FAV = "Favourite";
     public static final String REC_FAV_TABLE_NAME = "Favourites";
     public static final String REC_SAV_TABLE_NAME = "Saved";
 
@@ -27,10 +28,10 @@ public class RecipeDBHelper extends SQLiteOpenHelper {
         //Make sure you put spaces between SQL statements and Java strings:
         db.execSQL("CREATE TABLE " + REC_FAV_TABLE_NAME + "( "
                 + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COL_TITLE + " TEXT, " + COL_IMG + " TEXT, " + COL_URL + " TEXT)");
+                + COL_TITLE + " TEXT, " + COL_IMG + " TEXT, " + COL_FAV + " INTEGER, " + COL_URL + " TEXT)");
         db.execSQL("CREATE TABLE " + REC_SAV_TABLE_NAME + "( "
                 + COL_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COL_TITLE + " TEXT, " + COL_IMG + " TEXT, " + COL_URL + " TEXT)");
+                + COL_TITLE + " TEXT, " + COL_IMG + " TEXT, " + COL_FAV + " INTEGER, " + COL_URL + " TEXT)");
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

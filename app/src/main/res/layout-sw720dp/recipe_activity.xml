@@ -33,6 +33,7 @@
         android:id="@+id/recProgressBar"
         android:layout_below="@+id/recBtnSearch"
         android:layout_alignRight="@id/recBtnSearch"
+        style="?android:attr/progressBarStyleHorizontal"
         android:visibility="invisible"
         />
 
@@ -51,6 +52,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/recTbMain"
         android:layout_toRightOf="@id/recLstResults"
-        android:id="@+id/frame" />
+        android:id="@+id/recFrame" />
 
 </RelativeLayout>
