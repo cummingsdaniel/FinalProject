@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/recMmiNews"
+        android:title="@string/recMmiNewsText"
+        android:icon="@drawable/icons8_google_news_24"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+
+    <item android:id="@+id/recMmiCharge"
+        android:icon="@drawable/icons8_car_battery_24"
+        android:title="@string/recMmiChargeText"
+        android:orderInCategory="200"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/recMmiCurrency"
+        android:icon="@drawable/icons8_stocks_24"
+        android:title="@string/recMmiCurrencyText"
+        android:orderInCategory="300"
+        app:showAsAction="always"/>
+
+    <item android:id="@+id/recMmiHelp"
+        android:title="@string/recMmiHelpText"
+        android:orderInCategory="400"
+        app:showAsAction="never"/>
+
+</menu>

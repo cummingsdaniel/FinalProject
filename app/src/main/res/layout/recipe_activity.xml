@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recTbMain"/>
+
+    <EditText
+        android:id="@+id/recTxtSearch"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/recTbMain"
+        android:layout_toLeftOf="@id/recBtnSearch"
+        android:hint="@string/recTxtSearchHint"
+        android:layout_marginStart="60dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recBtnSearch"
+        android:text="@string/recBtnSearchText"
+        android:layout_below="@+id/recTbMain"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="60dp"
+        />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recProgressBar"
+        android:layout_below="@+id/recBtnSearch"
+        android:visibility="invisible"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recLstResults"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/recProgressBar"
+        />
+
+
+
+</RelativeLayout>

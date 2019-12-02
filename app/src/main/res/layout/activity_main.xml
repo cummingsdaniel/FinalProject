@@ -8,21 +8,24 @@
 
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn1Text"
+        android:id="@+id/mainBtnCurrency"
+        android:text="@string/MainBtnCurrencyText"
         />
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn2Text"
+        android:id="@+id/mainBtnCar"
+        android:text="@string/MainBtnCarText"
         />
     <Button android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn3Text"
+        android:id="@+id/mainBtnRecipe"
+        android:text="@string/MainBtnRecipeText"
         />
     <Button
         android:id="@+id/news_button"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/btn4Text"
+        android:text="@string/MainBtnNewsText"
         />
 
 </LinearLayout>

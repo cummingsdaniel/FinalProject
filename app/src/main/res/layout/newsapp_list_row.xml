@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
@@ -19,10 +18,9 @@
         android:padding="4dp">
 
         <ImageView
-            android:id="@+id/galleryImage"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            />
+            android:id="@+id/newsapp_listrow_galleryImage"
+            android:layout_width="113dp"
+            android:layout_height="96dp" />
     </LinearLayout>
 
 
@@ -34,7 +32,7 @@
         android:layout_weight="7"
         >
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/newsapp_listrow_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:shadowColor="#000"
@@ -45,10 +43,10 @@
             android:maxLines="2"
             android:scrollHorizontally="true"
             android:ellipsize="end"
-            android:text="This is news title"/>
+            android:text="Title"/>
 
         <TextView
-            android:id="@+id/details"
+            android:id="@+id/newsapp_listrow_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#777777"
@@ -57,16 +55,39 @@
             android:minLines="2"
             android:scrollHorizontally="true"
             android:ellipsize="end"
-            android:text="This is news description bla bla bla..."/>
+            android:text="Description"/>
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="fill"
-            app:srcCompat="@drawable/icons8-circled-up-right-48" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+
+            <Button
+                android:id="@+id/news_save_to_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#009688"
+                android:text="@string/newsapp_addToFavs_button_text" />
+
+            <Button
+                android:id="@+id/news_goto_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#009688"
+                android:text="@string/newsapp_goToPage_button_text" />
+
+            <Button
+                android:id="@+id/news_remove_from_favs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#009688"
+                android:text="@string/newsapp_removeFromFavs_button_text"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
     </LinearLayout>
-
-
-
 </LinearLayout>
