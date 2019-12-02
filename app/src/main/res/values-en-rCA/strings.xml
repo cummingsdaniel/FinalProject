@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="recMmiCurrencyText">Currency</string>
+    <string name="app_name">News App</string>
     <string name="recMmiChargeText">Car Charging</string>
     <string name="recMmiNewsText">News</string>
     <string name="recTxtSearchHint">Search</string>
@@ -13,4 +14,7 @@
     <string name="MainApp_name">CST2335 Final Project</string>
     <string name="recMmiHelpText">Help</string>
     <string name="recHelpFullText">"Author: Mark Simonyi     Activity Version: 0.2.0.1     To use this app, simply enter a search term in the search box at the top, and click search.     "</string>
+    <string name="newsapp_addToFavs_button_text">Fav it</string>
+    <string name="newsapp_removeFromFavs_button_text">Delete</string>
+    <string name="newsapp_goToPage_button_text">Link</string>
 </resources>
