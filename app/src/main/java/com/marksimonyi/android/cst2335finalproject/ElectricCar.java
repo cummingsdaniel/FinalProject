@@ -187,7 +187,7 @@ public class ElectricCar extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(getApplicationContext(),"Exiting..",Toast.LENGTH_SHORT).show();
-                                //setContentView(R.layout.activity_main); //go back to main activity
+                                setContentView(R.layout.activity_main); //go back to main activity
                             }
                         });
                 sb.show();

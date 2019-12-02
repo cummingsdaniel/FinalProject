@@ -30,5 +30,12 @@ public class MainActivity extends AppCompatActivity {
             Intent nextPage = new Intent(MainActivity.this, ForeignExchangeAPI.class);
             startActivity(nextPage);
         });
+
+        Button mainBtnElectric =  findViewById(R.id.mainBtnCar);
+
+        mainBtnElectric.setOnClickListener(clk -> {
+            Intent nextPage = new Intent(MainActivity.this, ElectricCar.class);
+            startActivity(nextPage);
+        });
     }
 }

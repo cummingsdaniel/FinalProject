@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RecipeFavourites" />
+        <activity android:name=".ElectricCar" />
         <activity android:name=".RecipeActivity"/>
         <activity android:name=".Article"/>
         <activity android:name=".NewsAppFavouritesActivity"/>

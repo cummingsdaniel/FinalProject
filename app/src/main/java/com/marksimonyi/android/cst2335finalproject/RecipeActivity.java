@@ -492,7 +492,7 @@ public class RecipeActivity extends AppCompatActivity {
         switch(item.getItemId())
         {
             case R.id.recMmiCharge:
-                Toast.makeText(this, "Car Charging Station finder not implemented", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Car Charging Station finder not implemented", Toast.LENGTH_LONG).show();
                 nextPage = new Intent( this, ElectricCar.class);
                 startActivity(nextPage);
                 break;
@@ -502,9 +502,9 @@ public class RecipeActivity extends AppCompatActivity {
                 startActivity(nextPage);
                 break;
             case R.id.recMmiNews:
-                Toast.makeText(this, "News not implemented", Toast.LENGTH_LONG).show();
-                //nextPage = new Intent( this, NewsActivity.class);
-                //startActivity(nextPage);
+                //Toast.makeText(this, "News not implemented", Toast.LENGTH_LONG).show();
+                nextPage = new Intent( this, NewsMain.class);
+                startActivity(nextPage);
                 break;
             case R.id.recMmiFav:
                 nextPage = new Intent(RecipeActivity.this, RecipeFavourites.class);

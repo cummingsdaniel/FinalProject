@@ -128,7 +128,7 @@ public class ForeignExchangeAPI extends AppCompatActivity {
                 startActivity(nextPage1);
                 break;
             case R.id.choice2:
-                Intent nextPage2 = new Intent(ForeignExchangeAPI.this, ForeignExchangeAPI.class);
+                Intent nextPage2 = new Intent(ForeignExchangeAPI.this, ElectricCar.class);
                 startActivity(nextPage2);
                 break;
             case R.id.choice3:
