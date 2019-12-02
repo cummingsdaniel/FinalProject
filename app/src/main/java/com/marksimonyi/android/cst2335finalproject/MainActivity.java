@@ -24,5 +24,11 @@ public class MainActivity extends AppCompatActivity {
             Intent nextPage = new Intent( MainActivity.this, RecipeActivity.class);
             startActivity(nextPage);
         });
+        Button mainBtnCurrency =  findViewById(R.id.mainBtnCurrency);
+
+        mainBtnCurrency.setOnClickListener(clk -> {
+            Intent nextPage = new Intent(MainActivity.this, ForeignExchangeAPI.class);
+            startActivity(nextPage);
+        });
     }
 }
