@@ -2,14 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/choice2item"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always|collapseActionView"
-        android:title="@string/searchbar"/>
 
 
 
     <item android:id="@+id/choice4"
-        android:title="@string/help" >
+        android:title="@string/help" />
+    <item android:id="@+id/choice1"
+        android:title="@string/help"
+        app:showAsAction="always"
+        android:icon="@drawable/icons8circledupright48"
+        />
+    <item android:id="@+id/choice2"
+        android:title="@string/help"
+        android:icon="@drawable/icons8_car_battery_24"
+        app:showAsAction="always"
+
+        />
+    <item android:id="@+id/choice3"
+        android:title="@string/help"
+        android:icon="@drawable/icons8_google_news_24"
+        app:showAsAction="always"
+        >
     </item>
 </menu>

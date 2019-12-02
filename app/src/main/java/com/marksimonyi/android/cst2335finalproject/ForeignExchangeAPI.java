@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -56,6 +56,9 @@ public class ForeignExchangeAPI extends AppCompatActivity {
         bar.setVisibility(View.INVISIBLE);
         ListView list = findViewById(R.id.List);
         //get a database:
+        Toolbar tBar = (Toolbar)findViewById(R.id.toolbar);
+        tBar.setTitle("Foreign currency");
+        setSupportActionBar(tBar);
         DatabaseHelper dbOpener = new DatabaseHelper(this);
         SQLiteDatabase db = dbOpener.getWritableDatabase();
 
@@ -106,42 +109,39 @@ public class ForeignExchangeAPI extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.foreignexchangemenu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.choice2item);
-        SearchView sView = (SearchView) searchItem.getActionView();
-        sView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
 
         return true;
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             //what to do when the menu item is selected:
-
+            case R.id.choice1:
+                Intent nextPage1 = new Intent(ForeignExchangeAPI.this, RecipeActivity.class);
+                startActivity(nextPage1);
+                break;
+            case R.id.choice2:
+                Intent nextPage2 = new Intent(ForeignExchangeAPI.this, ForeignExchangeAPI.class);
+                startActivity(nextPage2);
+                break;
+            case R.id.choice3:
+                Intent nextPage3 = new Intent(ForeignExchangeAPI.this, NewsMain.class);
+                startActivity(nextPage3);
+                break;
             case R.id.choice4:
-                Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "help on the way", Toast.LENGTH_LONG).show();
                 /**
-                 *
+                 * starts help menu
                  */
-                Intent nextPage = new Intent(ForeignExchangeAPI.this, ForeignExchangeHelpMenu.class);
-                startActivity(nextPage);
+                Intent nextPage4 = new Intent(ForeignExchangeAPI.this, ForeignExchangeHelpMenu.class);
+                startActivity(nextPage4);
                 break;
             default:
                 super.onOptionsItemSelected(item);
