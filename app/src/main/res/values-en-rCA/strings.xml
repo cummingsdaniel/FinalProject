@@ -30,7 +30,17 @@
     <string name="help1">Type the currency type you would like converted into the left search bar and the type to convert to in the right search bar</string>
     <string name="searchbar">Type here</string>
     <string name="search">Search</string>
-
+    <string name="text_find">Find</string>
+    <string name="text_lat">Latitude:</string>
+    <string name="text_lat2">Enter latitude here</string>
+    <string name="text_lon">Longitude:</string>
+    <string name="text_lon2">Enter longitude here</string>
+    <string name="text_phone">Phone Number</string>
+    <string name="text_start">Start</string>
+    <string name="text_title">Electric Car Station Finder</string>
+    <string name="text_title2">title</string>
+    <string name="text_x">Longitude</string>
+    <string name="text_y">Latitude</string>
 
 
 </resources>

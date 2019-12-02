@@ -37,4 +37,17 @@
     <string name="newsapp_removeFromFavs_button_text">Delete</string>
     <string name="newsapp_goToPage_button_text">Link</string>
 
+    <string name="elec_name">Electric Car Station Finder</string>
+    <string name="text_title">Electric Car Station Finder</string>
+    <string name="text_lat">Latitude:</string>
+    <string name="text_lon">Longitude:</string>
+    <string name="text_lat2">Enter latitude here</string>
+    <string name="text_lon2">Enter longitude here</string>
+    <string name="text_start">Start</string>
+
+    <string name="text_title2">title</string>
+    <string name="text_x">Longitude</string>
+    <string name="text_y">Latitude</string>
+    <string name="text_phone">Phone Number</string>
+    <string name="text_find">Find</string>
 </resources>
