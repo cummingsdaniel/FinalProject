@@ -22,7 +22,7 @@
         android:text="@string/MainBtnRecipeText"
         />
     <Button
-        android:id="@+id/news_button"
+        android:id="@+id/mainBtnNews"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/MainBtnNewsText"

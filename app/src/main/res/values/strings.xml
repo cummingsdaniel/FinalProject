@@ -16,7 +16,7 @@
     Activity Version: 0.2.0.1
     To use this app, simply enter a search term in the search box at the top, and click search.
     </string>
-    <string name="app_name">News App</string>
+
     <string name="newsapp_addToFavs_button_text">Fav it</string>
     <string name="newsapp_removeFromFavs_button_text">Delete</string>
     <string name="newsapp_goToPage_button_text">Link</string>

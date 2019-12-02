@@ -48,7 +48,6 @@ public class NewsMain extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class NewsMain extends AppCompatActivity {
         listNews = findViewById(R.id.listNews); //initializes ListView objests
         progressBar = findViewById(R.id.newsapp_progressbar); //initializes progress bar
         listNews.setEmptyView(progressBar); //instantiates the progress bar to show if adaptor is empty
-
         /*makes a toast if internet isn't working*/
         if(InternetStuff.isNetworkAvailable((getApplicationContext()))) {
             DownloadNews newsTask = new DownloadNews();
@@ -153,10 +151,9 @@ public class NewsMain extends AppCompatActivity {
                 ListNewsAdapter adapter = new ListNewsAdapter(NewsMain.this, dataList, false);
                 listNews.setAdapter(adapter);
 
-                listNews.setOnItemClickListener((list, Item, position, id) -> {
-                });
 
                 listNews.setOnItemClickListener((parent, view, position, id) -> {
+
                     Intent i = new Intent(NewsMain.this, Article.class);
                     i.putExtra("url", dataList.get(+position).get(KEY_URL));
                     startActivity(i);
@@ -170,9 +167,31 @@ public class NewsMain extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
-
-
-
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -57,21 +57,21 @@ class ListNewsAdapter extends BaseAdapter {
     /*Specifies how each Row in the News list will look*/
     public View getView(int position, View freshView, ViewGroup parent) {
         ListNewsRow listNewsRow = null;
-            listNewsRow = new ListNewsRow();
+        listNewsRow = new ListNewsRow();
 
         // The Layout Inflater is initialized to the LayoutInflater in context to the activity
-            LayoutInflater inflater = LayoutInflater.from(activity);
+        LayoutInflater inflater = LayoutInflater.from(activity);
         //freshView is now the root object for finding the widgets
-            freshView = inflater.inflate(R.layout.newsapp_list_row, parent, false);
+        freshView = inflater.inflate(R.layout.newsapp_list_row, parent, false);
         //the objects of the news list row are initialized to the widgets of the xml file.
-            listNewsRow.galleryImage = (ImageView) freshView.findViewById(R.id.newsapp_listrow_galleryImage);
-            listNewsRow.title = (TextView) freshView.findViewById(R.id.newsapp_listrow_title);
-            listNewsRow.description = (TextView) freshView.findViewById(R.id.newsapp_listrow_description);
-            listNewsRow.saveToFavs = (Button) freshView.findViewById(R.id.news_save_to_fav);
-            listNewsRow.goToPage = (Button) freshView.findViewById(R.id.news_goto_article);
-            listNewsRow.removeButton = (Button) freshView.findViewById(R.id.news_remove_from_favs);
+        listNewsRow.galleryImage = (ImageView) freshView.findViewById(R.id.newsapp_listrow_galleryImage);
+        listNewsRow.title = (TextView) freshView.findViewById(R.id.newsapp_listrow_title);
+        listNewsRow.description = (TextView) freshView.findViewById(R.id.newsapp_listrow_description);
+        listNewsRow.saveToFavs = (Button) freshView.findViewById(R.id.news_save_to_fav);
+        listNewsRow.goToPage = (Button) freshView.findViewById(R.id.news_goto_article);
+        listNewsRow.removeButton = (Button) freshView.findViewById(R.id.news_remove_from_favs);
         //Sets a tag associated with the view and a key.
-            freshView.setTag(listNewsRow);
+        freshView.setTag(listNewsRow);
         //fresh view is finalized to a view for later use.
         final View view = freshView;
         //ID are set to the ImageView and textView objects
@@ -85,11 +85,11 @@ class ListNewsAdapter extends BaseAdapter {
         //The add to favs button behavior
         listNewsRow.saveToFavs.setOnClickListener(fbtn -> {
             Log.d("This thing...", "Saved to fav");
-        //Hasp Map object is declared as map, initialized and instantiated to the position of the ArrayList
+            //Hasp Map object is declared as map, initialized and instantiated to the position of the ArrayList
             HashMap<String, String> map = getItem(position);
             if(dbhelper.insertData(map.get(NewsMain.KEY_TITLE),
-                        map.get(NewsMain.KEY_URL),
-                        map.get(NewsMain.KEY_DESCRIPTION),
+                    map.get(NewsMain.KEY_URL),
+                    map.get(NewsMain.KEY_DESCRIPTION),
                     map.get(NewsMain.KEY_URLTOIMAGE))){
                 Log.d("saved to favourites", "Saved");
                 Toast.makeText(activity, "Twas Saved", Toast.LENGTH_SHORT).show();
@@ -101,7 +101,7 @@ class ListNewsAdapter extends BaseAdapter {
 
         HashMap<String, String> mapThread = hashMapArrayList.get(position);
         String url = mapThread.get(NewsMain.KEY_URL);
-
+        //remove button
         listNewsRow.removeButton.setOnClickListener(rbtn ->{
             if(dbhelper.removeData(url)) {
                 Log.d("it is deleted", "deleted");
@@ -113,21 +113,22 @@ class ListNewsAdapter extends BaseAdapter {
             }
             activity.finish();
         });
-
+        //go to link button
         listNewsRow.goToPage.setOnClickListener(pbtn ->{
             Intent i = new Intent(activity, Article.class);
             i.putExtra("url",url );
             activity.startActivity(i);
         });
-
+        //thumbnail loader
         try{
             listNewsRow.title.setText(mapThread.get(NewsMain.KEY_TITLE));
             listNewsRow.description.setText(mapThread.get(NewsMain.KEY_DESCRIPTION));
 
+            //just to make sure it's there
             if(mapThread.get(NewsMain.KEY_URLTOIMAGE).toString().length() < 5)
-            {
+            {   //if not view thumbnail is gone
                 listNewsRow.galleryImage.setVisibility(View.GONE);
-            }else{
+            }else{//otherwise load the jpeg
                 Picasso.get()
                         .load(mapThread.get(NewsMain.KEY_URLTOIMAGE))
                         .resize(300, 200)
@@ -136,24 +137,28 @@ class ListNewsAdapter extends BaseAdapter {
             }
         }catch(Exception e) {}
 
+        //the delete button is visible in the Favourites list
+        // with the save to favs button invisable
         if(isFav) {
             listNewsRow.removeButton.setVisibility(View.VISIBLE);
             listNewsRow.saveToFavs.setVisibility(View.INVISIBLE);
-        }else{
+        }
+        //the delete button is invisible in the Newlist feed
+        // and the save to favs button is visable
+        else{
             listNewsRow.removeButton.setVisibility(View.INVISIBLE);
             listNewsRow.saveToFavs.setVisibility(View.VISIBLE);
         }
         return freshView;
     }
 
-    }
-
+}
 /*Functon based class that holds declaired variables of for each row of the ListView*/
 class ListNewsRow {
     ImageView galleryImage;
     TextView title;
     TextView description;
-    Button saveToFavs; 
+    Button saveToFavs;
     Button goToPage;
     Button removeButton;
 }
