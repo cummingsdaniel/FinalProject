@@ -64,7 +64,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="fill"
-            app:srcCompat="@drawable/icons8-circled-up-right-48" />
+            app:srcCompat="@drawable/icons8circledupright48" />
     </LinearLayout>
 
 
