@@ -11,15 +11,13 @@
     <string name="btn4Text">News - TBD</string>
     <string name="title_activity_news_main">NewsMain</string>
 
-    <string name="go_to_fav">Favorites</string>
+    <string name="go_to_fav">Favourites</string>
     <string name="author1">Author Name: Jarod Porter</string>
     <string name="versionNumber1">Version 1</string>
     <string name="help">help</string>
     <string name="help1">Type the currency type you would like converted into the search bar</string>
     <string name="searchbar">Type here</string>
     <string name="search">Search</string>
-
-
 
 
 </resources>
