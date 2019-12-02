@@ -488,25 +488,26 @@ public class RecipeActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent nextPage;
         switch(item.getItemId())
         {
             case R.id.recMmiCharge:
                 Toast.makeText(this, "Car Charging Station finder not implemented", Toast.LENGTH_LONG).show();
-                //Intent nextPage = new Intent( this, ChargeActivity.class);
+                //nextPage = new Intent( this, ChargeActivity.class);
                 //startActivity(nextPage);
                 break;
             case R.id.recMmiCurrency:
-                Toast.makeText(this, "Currency Exchange not implemented", Toast.LENGTH_LONG).show();
-                //Intent nextPage = new Intent( this, CurrencyActivity.class);
-                //startActivity(nextPage);
+                //Toast.makeText(this, "Currency Exchange not implemented", Toast.LENGTH_LONG).show();
+                nextPage = new Intent( this, ForeignExchangeAPI.class);
+                startActivity(nextPage);
                 break;
             case R.id.recMmiNews:
                 Toast.makeText(this, "News not implemented", Toast.LENGTH_LONG).show();
-                //Intent nextPage = new Intent( this, NewsActivity.class);
+                //nextPage = new Intent( this, NewsActivity.class);
                 //startActivity(nextPage);
                 break;
             case R.id.recMmiFav:
-                Intent nextPage = new Intent(RecipeActivity.this, RecipeFavourites.class);
+                nextPage = new Intent(RecipeActivity.this, RecipeFavourites.class);
                 startActivity(nextPage); //make the transition
                 break;
             case R.id.recMmiHelp:

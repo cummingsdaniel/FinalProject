@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="recMmiCurrencyText">Currency</string>
+    <string name="app_name">News App</string>
     <string name="recMmiChargeText">Car Charging</string>
     <string name="recMmiNewsText">News</string>
     <string name="recTxtSearchHint">Search</string>
-    <string name="recLblViewTitle">Title:</string>
+    <string name="recLblViewTitle">Title</string>
     <string name="recBtnSearchText">Search</string>
     <string name="MainBtnRecipeText">Recipe Search - Mark Simonyi</string>
     <string name="MainBtnNewsText">News - Daniel Cummings</string>
@@ -18,4 +19,24 @@
     <string name="recLblViewUrl">URL:</string>
     <string name="recMmiFavText">Favourites</string>
     <string name="recBtnFrgAddText">Add to Favourites</string>
+    <string name="newsapp_addToFavs_button_text">Fav it</string>
+    <string name="newsapp_removeFromFavs_button_text">Delete</string>
+    <string name="newsapp_goToPage_button_text">Link</string>
+    <string name="btn1Text">Foreign Currency Exchange - Jarod Porter</string>
+    <string name="btn2Text">Electric Car Charging Station Finder - TBD</string>
+    <string name="btn3Text">Recipe Search - TBD</string>
+    <string name="btn4Text">News - TBD</string>
+    <string name="title_activity_news_main">NewsMain</string>
+
+    <string name="go_to_fav">Favourites</string>
+    <string name="author1">Author Name: Jarod Porter</string>
+    <string name="versionNumber1">Version 1</string>
+    <string name="help">help</string>
+    <string name="help1">Type the currency type you would like converted into the left search bar and the type to convert to in the right search bar</string>
+    <string name="searchbar">Type here</string>
+    <string name="search">Search</string>
+
+
+
+
 </resources>
