@@ -15,9 +15,10 @@
     <string name="author1">Author Name: Jarod Porter</string>
     <string name="versionNumber1">Version 1</string>
     <string name="help">help</string>
-    <string name="help1">Type the currency type you would like converted into the search bar</string>
+    <string name="help1">Type the currency type you would like converted into the left search bar and the type to convert to in the right search bar</string>
     <string name="searchbar">Type here</string>
     <string name="search">Search</string>
+
 
 
 </resources>

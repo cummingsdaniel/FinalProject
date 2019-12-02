@@ -35,16 +35,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-
+/**
+ * Main class for currency exchange
+ */
 public class ForeignExchangeAPI extends AppCompatActivity {
     BaseAdapter myAdapter;
     ArrayList<ForeignExchangeList> myList = new ArrayList<>();
     String x,y,z;
+    ForeignExchangeList xxx;
+
 
     @Override
+/**
+ * On Create
+ */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foreignexchangeapi);
+        ProgressBar bar = findViewById(R.id.progressbar);
+        bar.setVisibility(View.INVISIBLE);
         ListView list = findViewById(R.id.List);
         //get a database:
         DatabaseHelper dbOpener = new DatabaseHelper(this);
@@ -63,17 +72,20 @@ public class ForeignExchangeAPI extends AppCompatActivity {
             String Converted = results.getString(convo1ColIndex);
             String converted2 = results.getString(convo2ColIndex);
 
-            //add the new Contact to the array list:
+            //add the new currencyexchange to the array list:
             myList.add(new ForeignExchangeList(currency,Converted,converted2));
             myAdapter.notifyDataSetChanged();
         }
         list.setOnItemClickListener( ( parent,  view,  position,  id) ->{
-            Toast.makeText(this, "You clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, xxx.getBase() +xxx.getConvo1()+xxx.convo2, Toast.LENGTH_LONG).show();
+
         });
 
 
         Button insertButton = findViewById(R.id.button);
-
+        /**
+         * new button to start conversion
+         */
         insertButton.setOnClickListener(click -> {
             Snackbar.make(insertButton, "Converting", Snackbar.LENGTH_LONG).show();
             EditText base1 = findViewById(R.id.base);
@@ -83,7 +95,9 @@ public class ForeignExchangeAPI extends AppCompatActivity {
              z = base1.getText().toString();
              x = conversion1.getText().toString();
              y = ","+conversion2.getText().toString();
-
+            /**
+             * start the conversion
+             */
             foreign.execute();
 
         });
@@ -123,7 +137,9 @@ public class ForeignExchangeAPI extends AppCompatActivity {
 
             case R.id.choice4:
                 Toast.makeText(this, "You clicked on the overflow menu", Toast.LENGTH_LONG).show();
-
+                /**
+                 *
+                 */
                 Intent nextPage = new Intent(ForeignExchangeAPI.this, ForeignExchangeHelpMenu.class);
                 startActivity(nextPage);
                 break;
@@ -140,7 +156,9 @@ public class ForeignExchangeAPI extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            /**
+             * Insert data into the database
+             */
             myList.add(new ForeignExchangeList(base,convo1,convo2));
             myAdapter.notifyDataSetChanged();
         }
@@ -148,6 +166,9 @@ public class ForeignExchangeAPI extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            /**
+             * Start up progressbar
+             */
             ProgressBar bar = findViewById(R.id.progressbar);
             bar.setVisibility(View.VISIBLE);
             bar.setProgress(values[0]);
@@ -161,7 +182,6 @@ public class ForeignExchangeAPI extends AppCompatActivity {
             String ret = null;
             String queryURLUV = "http://api.openweathermap.org/data/2.5/https://api.exchangeratesapi.io/latest?base="+z+"&symbols="+x+y;
             try {
-                publishProgress(25);
                 // Connect to the server:
                 URL url2 = new URL(queryURLUV);
                 HttpURLConnection url2Connection = (HttpURLConnection) url2.openConnection();
@@ -221,16 +241,29 @@ public class ForeignExchangeAPI extends AppCompatActivity {
 
         @Override
         public View getView(int p, View recycled, ViewGroup parent) {
+            CurrencyViewHolder holder = new CurrencyViewHolder();
             View thisRow = recycled;
+            ForeignExchangeList foreign = myList.get(p);
 
             if (recycled == null)
                 thisRow = getLayoutInflater().inflate(R.layout.foreignexchangeapilist, null);
+            /**
+             * Add the values into the text views
+             */
+            holder.baseMsg = thisRow.findViewById(R.id.api);
+            holder.baseMsg.setText(foreign.getBase());
 
-            TextView itemText = thisRow.findViewById(R.id.api);
-            itemText.setText("Array at:" + p + " is " + getItem(p));
+            holder.convo1Msg = thisRow.findViewById(R.id.api2);
+            holder.convo1Msg.setText(foreign.getConvo1());
 
-
+            holder.convo2Msg = thisRow.findViewById(R.id.api3);
+            holder.convo2Msg.setText(foreign.getConvo2());
             return thisRow;
+        }
+        private class CurrencyViewHolder{
+            private TextView baseMsg;
+            private TextView convo1Msg;
+            private TextView convo2Msg;
         }
     }
 
