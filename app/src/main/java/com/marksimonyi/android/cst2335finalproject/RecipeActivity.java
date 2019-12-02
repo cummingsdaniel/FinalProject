@@ -493,8 +493,8 @@ public class RecipeActivity extends AppCompatActivity {
         {
             case R.id.recMmiCharge:
                 Toast.makeText(this, "Car Charging Station finder not implemented", Toast.LENGTH_LONG).show();
-                //nextPage = new Intent( this, ChargeActivity.class);
-                //startActivity(nextPage);
+                nextPage = new Intent( this, ElectricCar.class);
+                startActivity(nextPage);
                 break;
             case R.id.recMmiCurrency:
                 //Toast.makeText(this, "Currency Exchange not implemented", Toast.LENGTH_LONG).show();

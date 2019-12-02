@@ -1,4 +1,4 @@
-package project;
+package com.marksimonyi.android.cst2335finalproject;
 
 import android.content.Context;
 import android.content.SharedPreferences;

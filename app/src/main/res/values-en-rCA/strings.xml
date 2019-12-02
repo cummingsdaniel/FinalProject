@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">News App</string>
     <string name="recMmiCurrencyText">Currency</string>
     <string name="recMmiChargeText">Car Charging</string>
     <string name="recMmiNewsText">News</string>
@@ -26,7 +27,7 @@
     <string name="recLblViewUrl">URL:</string>
     <string name="recMmiFavText">Favourites</string>
     <string name="recBtnFrgAddText">Add to Favourites</string>
-
+    <string name="elec_name">Electric Car Station Finder</string>
     <string name="go_to_fav">Favourites</string>
     <string name="author1">Author Name: Jarod Porter</string>
     <string name="versionNumber1">Version 1</string>

@@ -1,4 +1,4 @@
-package project;
+package com.marksimonyi.android.cst2335finalproject;
 
 public class ListItem {
     protected String title;
