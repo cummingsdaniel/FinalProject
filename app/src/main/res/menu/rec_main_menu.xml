@@ -20,9 +20,14 @@
         android:orderInCategory="300"
         app:showAsAction="always"/>
 
+    <item android:id="@+id/recMmiFav"
+        android:title="@string/recMmiFavText"
+        android:orderInCategory="400"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/recMmiHelp"
         android:title="@string/recMmiHelpText"
-        android:orderInCategory="400"
+        android:orderInCategory="500"
         app:showAsAction="never"/>
 
 </menu>

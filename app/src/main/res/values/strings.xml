@@ -23,7 +23,7 @@
     <string name="app_name">News App</string>
     <string name="recTxtSearchHint">Search</string>
     <string name="recBtnSearchText">Search</string>
-    <string name="recLblViewTitle">Title</string>
+    <string name="recLblViewTitle">Title:</string>
     <string name="recMmiNewsText">News</string>
     <string name="recMmiCurrencyText">Currency</string>
     <string name="recMmiChargeText">Car Charging</string>
@@ -32,6 +32,11 @@
     Activity Version: 0.2.0.1
     To use this app, simply enter a search term in the search box at the top, and click search.
     </string>
+    <string name="recLblViewId">ID:</string>
+    <string name="recBtnFrgDeleteText">Delete</string>
+    <string name="recLblViewUrl">URL:</string>
+    <string name="recMmiFavText">Favorites</string>
+    <string name="recBtnFrgAddText">Add to Favourites</string>
 
     <string name="newsapp_addToFavs_button_text">Fav it</string>
     <string name="newsapp_removeFromFavs_button_text">Delete</string>

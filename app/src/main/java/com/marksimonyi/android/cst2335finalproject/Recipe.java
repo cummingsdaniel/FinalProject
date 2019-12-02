@@ -10,6 +10,23 @@ public class Recipe {
     private String image;
     private String url;
 
+    public boolean isFav() {
+        return fav;
+    }
+
+    public void setFav(boolean fav) {
+        this.fav = fav;
+    }
+
+    private boolean fav;
+    /**
+     * tracks the database id of
+     */
+    private long id;
+    /**
+     * tracks whether this recipe is in the favourites list
+     */
+    private boolean isFave;
 
     /**
      * Constructor; creates the Recipe object with all properties.
@@ -21,6 +38,9 @@ public class Recipe {
         this.title = title;
         this.image = image;
         this.url = url;
+    }
+    public Recipe(int id) {
+        this.id = id;
     }
 
     /**
@@ -69,5 +89,48 @@ public class Recipe {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    /**
+     * setter for ID
+     * @param setId
+     */
+    protected void setId(long setId ) { id = setId; }
+
+    /**
+     * getter for ID
+     * @return
+     */
+    public long getId() { return id; }
+
+    /**
+     * getter for isFave
+     * @return
+     */
+    public boolean isFave() {
+        return isFave;
+    }
+
+    /**
+     * setter for isFave
+     * @param fave
+     */
+    public void setFave(boolean fave) {
+        isFave = fave;
+    }
+
+    /**
+     * equals method for recipes.
+     * @param o
+     * @return true if the id is the same, false otherwise.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
+            Recipe r = (Recipe)o;
+            return r.getId() == this.getId();
+        } else {
+            return false;
+        }
     }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="recMmiCurrencyText">Currency</string>
-    <string name="app_name">News App</string>
     <string name="recMmiChargeText">Car Charging</string>
     <string name="recMmiNewsText">News</string>
     <string name="recTxtSearchHint">Search</string>
@@ -22,6 +21,11 @@
     <string name="btn3Text">Recipe Search - TBD</string>
     <string name="btn4Text">News - TBD</string>
     <string name="title_activity_news_main">NewsMain</string>
+    <string name="recLblViewId">ID:</string>
+    <string name="recBtnFrgDeleteText">Delete</string>
+    <string name="recLblViewUrl">URL:</string>
+    <string name="recMmiFavText">Favourites</string>
+    <string name="recBtnFrgAddText">Add to Favourites</string>
 
     <string name="go_to_fav">Favourites</string>
     <string name="author1">Author Name: Jarod Porter</string>
