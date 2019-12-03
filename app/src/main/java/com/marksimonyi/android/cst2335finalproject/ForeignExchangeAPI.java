@@ -180,7 +180,7 @@ public class ForeignExchangeAPI extends AppCompatActivity {
             if (y == "") y = "BLANK";
 
             String ret = null;
-            String queryURLUV = "http://api.openweathermap.org/data/2.5/https://api.exchangeratesapi.io/latest?base="+z+"&symbols="+x+y;
+            String queryURLUV = "https://api.exchangeratesapi.io/latest?base="+z+"&symbols="+x+y;
             try {
                 // Connect to the server:
                 URL url2 = new URL(queryURLUV);
@@ -202,15 +202,19 @@ public class ForeignExchangeAPI extends AppCompatActivity {
 
                 base = jObject.getString("base");
                 publishProgress(50);
-                convo1 = jObject.getString(x);
+                JSONObject j = new JSONObject(jObject.getString("rates"));
+                convo1 = j.getString(x);
                 publishProgress(75);
-                convo2 = jObject.getString(y);
+                convo2 = j.getString(y);
                 publishProgress(100);
 
 
             }
             catch(MalformedURLException mfe){ ret = "Malformed URL exception"; }
-            catch(IOException ioe)          { ret = "IO Exception. Is the Wifi connected?";} catch (JSONException e) {
+            catch(IOException ioe)          { ret = "IO Exception. Is the Wifi connected?";
+                ioe.printStackTrace();
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
             //What is returned here will be passed as a parameter to onPostExecute:
