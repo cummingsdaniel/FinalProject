@@ -11,13 +11,13 @@
         android:label="@string/MainApp_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".RecipeFavourites" />
         <activity android:name=".ElectricCar" />
         <activity android:name=".RecipeActivity"/>
-        <activity android:name=".NewsApp.Article"/>
-        <activity android:name=".NewsApp.NewsAppFavouritesActivity"/>
-        <activity android:name=".NewsApp.NewsMain"/>
+        <activity android:name=".Article"/>
+        <activity android:name=".NewsAppFavouritesActivity"/>
+        <activity android:name=".NewsMain"/>
         <activity android:name=".ViewRecipe" />
         <activity android:name=".MainActivity">
             <intent-filter>
