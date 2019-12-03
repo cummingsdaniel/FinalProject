@@ -45,8 +45,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.marksimonyi.android.cst2335finalproject.NewsApp.NewsMain;
-
 
 /**
  * @author Mark Simonyi

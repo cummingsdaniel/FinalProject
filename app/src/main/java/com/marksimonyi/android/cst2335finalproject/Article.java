@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject.NewsApp;
+package com.marksimonyi.android.cst2335finalproject;
 
 import android.app.Activity;
 import android.content.Intent;

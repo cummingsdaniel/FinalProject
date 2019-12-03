@@ -6,8 +6,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.marksimonyi.android.cst2335finalproject.NewsApp.NewsMain;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

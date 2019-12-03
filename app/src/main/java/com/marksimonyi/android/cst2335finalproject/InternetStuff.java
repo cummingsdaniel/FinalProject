@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject.NewsApp;
+package com.marksimonyi.android.cst2335finalproject;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

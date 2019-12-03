@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject.NewsApp;
+package com.marksimonyi.android.cst2335finalproject;
 
 
 
@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-
-import com.marksimonyi.android.cst2335finalproject.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

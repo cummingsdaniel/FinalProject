@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject.NewsApp;
+package com.marksimonyi.android.cst2335finalproject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.marksimonyi.android.cst2335finalproject.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
