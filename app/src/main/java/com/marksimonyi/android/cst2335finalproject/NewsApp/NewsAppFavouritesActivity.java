@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject;
+package com.marksimonyi.android.cst2335finalproject.NewsApp;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +7,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.marksimonyi.android.cst2335finalproject.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

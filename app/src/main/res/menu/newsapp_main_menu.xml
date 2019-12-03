@@ -2,17 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".NewsMain">
+    tools:context=".NewsApp.NewsMain">
 
     <item android:id="@+id/newsapp_go_to_favs"
         android:icon="@drawable/heart"
-        android:title="Favourites"
-        android:orderInCategory="1"
+        android:title="@string/recMmiFavText"
+        android:orderInCategory="4"
+        app:showAsAction="always"/>
+
+
+    <item android:id="@+id/choice2"
+        android:title="@string/help"
+        android:icon="@drawable/icons8_car_battery_24"
+        android:orderInCategory="3"
+        app:showAsAction="always"
+
+        />
+    <item android:id="@+id/recMmiCurrency"
+        android:icon="@drawable/icons8_stocks_24"
+        android:title="@string/recMmiCurrencyText"
+        android:orderInCategory="2"
         app:showAsAction="always"/>
 
     <item android:id="@+id/newsapp_search_item"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:icon="@android:drawable/ic_search_category_default"
         app:showAsAction="always|collapseActionView"
+        android:orderInCategory="1"
         android:title="Search"/>
 </menu>

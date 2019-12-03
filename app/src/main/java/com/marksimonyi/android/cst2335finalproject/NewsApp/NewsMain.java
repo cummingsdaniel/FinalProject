@@ -1,4 +1,8 @@
-package com.marksimonyi.android.cst2335finalproject;
+package com.marksimonyi.android.cst2335finalproject.NewsApp;
+
+
+
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,9 +15,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+
+import com.marksimonyi.android.cst2335finalproject.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+
 
 /**
  * NewsMain.java
@@ -32,12 +40,12 @@ import java.util.HashMap;
 /*This Class launches the News List interface.*/
 public class NewsMain extends AppCompatActivity {
 
-    ListView listNews;
-    ProgressBar progressBar;
-    ArrayList<HashMap<String, String>> dataList = new ArrayList<>(); //an Arraylist that will map(<key, value>)
-
     static final String API_KEY = "f665129def0f4fc1bab8809ee6fc13da"; //API key
     String INPUT_SEARCH = "trump"; //input search key. For now it is set to the value of trump as a default to ensure it works
+    ListView listNews;
+    ProgressBar progressBar;
+
+    ArrayList<HashMap<String, String>> dataList = new ArrayList<>(); //an Arraylist that will map(<key, value>)
     static final String KEY_TITLE = "title"; //title Key
     static final String KEY_DESCRIPTION = "description"; //description key
     static final String KEY_URL = "url"; //url key
@@ -48,13 +56,17 @@ public class NewsMain extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newsapp_activity_main); //initializes Layout of Activity
+//        Toolbar tb = findViewById(R.id.news_goto_article bmvnnmn);
+//        setSupportActionBar(tb);
         listNews = findViewById(R.id.listNews); //initializes ListView objests
         progressBar = findViewById(R.id.newsapp_progressbar); //initializes progress bar
         listNews.setEmptyView(progressBar); //instantiates the progress bar to show if adaptor is empty
+
         /*makes a toast if internet isn't working*/
         if(InternetStuff.isNetworkAvailable((getApplicationContext()))) {
             DownloadNews newsTask = new DownloadNews();
@@ -66,9 +78,10 @@ public class NewsMain extends AppCompatActivity {
 
     /*This inflates the Search bar on click*/
     @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.newsapp_main_menu, menu);
+
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.newsapp_search_item)
                 .getActionView();
@@ -111,7 +124,6 @@ public class NewsMain extends AppCompatActivity {
     }
     /*A private AsyncTask inherited class for the datalist.*/
     private class DownloadNews extends AsyncTask<String, Void, String> {
-        String responseType;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -151,7 +163,14 @@ public class NewsMain extends AppCompatActivity {
                 ListNewsAdapter adapter = new ListNewsAdapter(NewsMain.this, dataList, false);
                 listNews.setAdapter(adapter);
 
+                listNews.setOnItemClickListener((list, Item, position, id) -> {
 
+                });
+
+/*                if(isTablet) {
+                    ArticaleFragment articaleFragment = new ArticaleFragment();
+                    articaleFragment.setArguments(dataList.get());
+                }*/
                 listNews.setOnItemClickListener((parent, view, position, id) -> {
 
                     Intent i = new Intent(NewsMain.this, Article.class);

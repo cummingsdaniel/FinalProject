@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.marksimonyi.android.cst2335finalproject.NewsApp.NewsMain;
 
 import org.json.JSONException;
 import org.json.JSONObject;

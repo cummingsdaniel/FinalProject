@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject;
+package com.marksimonyi.android.cst2335finalproject.NewsApp;
 
 import android.content.ContentValues;
 import android.content.Context;

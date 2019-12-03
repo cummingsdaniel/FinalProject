@@ -1,4 +1,4 @@
-package com.marksimonyi.android.cst2335finalproject;
+package com.marksimonyi.android.cst2335finalproject.NewsApp;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.marksimonyi.android.cst2335finalproject.R;
 
 /**
  * Article.java
