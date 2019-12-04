@@ -19,7 +19,8 @@
         android:background="#FFFFFF"
         android:divider="#F5F5F5"
         android:dividerHeight="1dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:layout_below="@id/newsTbMain"/>
 
     <ProgressBar
         android:id="@+id/newsapp_progressbar"

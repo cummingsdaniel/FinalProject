@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,8 +60,8 @@ public class NewsMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newsapp_activity_main); //initializes Layout of Activity
-//        Toolbar tb = findViewById(R.id.news_goto_article bmvnnmn);
-//        setSupportActionBar(tb);
+        Toolbar tb = findViewById(R.id.newsTbMain);
+        setSupportActionBar(tb);
         listNews = findViewById(R.id.listNews); //initializes ListView objests
         progressBar = findViewById(R.id.newsapp_progressbar); //initializes progress bar
         listNews.setEmptyView(progressBar); //instantiates the progress bar to show if adaptor is empty
