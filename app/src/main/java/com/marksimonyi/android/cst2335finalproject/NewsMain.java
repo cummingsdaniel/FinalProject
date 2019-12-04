@@ -36,7 +36,7 @@ import java.util.HashMap;
  * 2019-12-02
  */
 
-/*This Class launches the News List interface.*/
+/**This Class launches the News List interface.*/
 public class NewsMain extends AppCompatActivity {
 
     static final String API_KEY = "f665129def0f4fc1bab8809ee6fc13da"; //API key
@@ -50,7 +50,7 @@ public class NewsMain extends AppCompatActivity {
     static final String KEY_URL = "url"; //url key
     static final String KEY_URLTOIMAGE = "urlToImage"; //image url key
 
-    /*It's Debugging tool...without the crust *slowclap* */
+    /**It's Debugging tool...without the crust *slowclap* */
     public void bread(String s){
         Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT);
     }
@@ -116,7 +116,19 @@ public class NewsMain extends AppCompatActivity {
                 Intent jumpToFavourites = new Intent(NewsMain.this, NewsAppFavouritesActivity.class);
                 startActivity(jumpToFavourites);
                 break;
-            default:
+            case(R.id.choice2):
+                Intent jumpToCharger = new Intent(NewsMain.this, ElectricCar.class);
+                startActivity(jumpToCharger);
+                break;
+            case R.id.recMmiCurrency:
+                Intent jumpToForeignExchange = new Intent(NewsMain.this, ForeignExchangeAPI.class);
+                startActivity(jumpToForeignExchange);
+                break;
+            case(R.id.choice1):
+                Intent jumptoRec = new Intent(NewsMain.this, RecipeActivity.class);
+                startActivity(jumptoRec);
+                break;
+                default:
                 break;
         }
         return true;

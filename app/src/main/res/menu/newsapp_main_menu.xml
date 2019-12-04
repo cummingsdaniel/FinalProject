@@ -7,22 +7,28 @@
     <item android:id="@+id/newsapp_go_to_favs"
         android:icon="@drawable/heart"
         android:title="@string/recMmiFavText"
-        android:orderInCategory="4"
+        android:orderInCategory="5"
         app:showAsAction="always"/>
 
 
     <item android:id="@+id/choice2"
         android:title="@string/help"
         android:icon="@drawable/icons8_car_battery_24"
-        android:orderInCategory="3"
+        android:orderInCategory="4"
         app:showAsAction="always"
 
         />
     <item android:id="@+id/recMmiCurrency"
         android:icon="@drawable/icons8_stocks_24"
         android:title="@string/recMmiCurrencyText"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/choice1"
+        android:title="@string/help"
+        android:icon="@drawable/icons8circledupright48"
+        android:orderInCategory="3"
+        />
 
     <item android:id="@+id/newsapp_search_item"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
